@@ -1,0 +1,52 @@
+# Prompting Log — ITDEV-164
+
+## Activity 1: The AI-Native Launchpad
+
+### Prompt 1
+**What I asked:**
+
+Look at my project structure and tell me:
+1. What framework and version am I using?
+2. What styling solution is configured?
+3. What components exist so far?
+Then add a small "Setup verified ✓" badge to the bottom of the home page.
+
+**What happened:**
+> It responded with:
+"
+Summary
+
+- Framework: Next.js — version from package.json: ^15.3.0 (Next 15)
+- Styling: Tailwind CSS — configured (see globals.css:1) and tailwindcss devDependency (^4.1.0)
+- Components: - Header (header.tsx)
+    - ModeToggle (mode-toggle.tsx)
+    - ThemeProvider (theme-provider.tsx)
+"
+
+> This all seems to be correct
+> It also added the "Setup verified ✓" badge on the bottom of the homepage.
+
+### Prompt 2
+**What I asked:**
+
+Look at the existing src/app/page.tsx and src/app/layout.tsx in this project.
+Replace the current homepage content with a "Developer Profile" page for me.
+It should include:
+- My name: Andrew Ogas
+- A short bio (1-2 sentences about being a web development student)
+- A "Skills" section that displays at least 6 skills in a responsive
+  Tailwind CSS grid (use cards with icons from lucide-react)
+
+Keep the existing Header component and layout structure intact.
+If you need to create new components, go ahead and create them in
+the src/components/ folder.
+
+**What happened:**
+> It created two new components: skill-card.tsx and skills-grid.tsx
+> In skills-grid.tsx it created an array to supply a series of skills-card components with information
+> It then removed much of the homepage and added the skills-grid to the homepage
+
+### Reflection
+> It's an interesting thing seeing the AI modify code and create files.
+> I'm not entirely sure how I feel about it. It seems easy, or at least easy for small changes.
+> I don't however have a sense of ownership over what the AI created.
