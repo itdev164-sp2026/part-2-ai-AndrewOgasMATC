@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Geist } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Header } from "@/components/header";
+import { AppSidebar } from "@/components/app-sidebar";
+import { DashboardTopbar } from "@/components/dashboard-topbar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
@@ -31,8 +33,15 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          <main className="mx-auto max-w-5xl px-4 py-8">{children}</main>
+          <SidebarProvider>
+            <AppSidebar />
+            <SidebarInset>
+              <DashboardTopbar />
+              <main className="flex-1 px-4 py-6 md:px-6 md:py-8">
+                <div className="mx-auto w-full max-w-5xl">{children}</div>
+              </main>
+            </SidebarInset>
+          </SidebarProvider>
         </ThemeProvider>
       </body>
     </html>
