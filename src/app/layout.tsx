@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Geist } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AppSidebar } from "@/components/app-sidebar";
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
 import { DashboardTopbar } from "@/components/dashboard-topbar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import "./globals.css";
@@ -36,7 +37,7 @@ export default function RootLayout({
           <SidebarProvider>
             <AppSidebar />
             <SidebarInset>
-              <DashboardTopbar />
+              <DashboardTopbar breadcrumb={<BreadcrumbNav />} />
               <main className="flex-1 px-4 py-6 md:px-6 md:py-8">
                 <div className="mx-auto w-full max-w-5xl">{children}</div>
               </main>

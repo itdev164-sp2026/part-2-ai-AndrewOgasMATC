@@ -1,30 +1,11 @@
 "use client";
 
-import { Fragment } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import type { ReactNode } from "react";
 import { ModeToggle } from "@/components/mode-toggle";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
-function toTitle(segment: string): string {
-  return segment
-    .split("-")
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join(" ");
-}
-
-export function DashboardTopbar() {
-  const pathname = usePathname() || "/";
-  const segments = pathname.split("/").filter(Boolean);
+export function DashboardTopbar({ breadcrumb }: { breadcrumb: ReactNode }) {
 
   return (
     <header className="sticky top-0 z-20 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/70">
@@ -32,39 +13,7 @@ export function DashboardTopbar() {
         <SidebarTrigger />
         <Separator orientation="vertical" className="h-5" />
 
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              {segments.length === 0 ? (
-                <BreadcrumbPage>Overview</BreadcrumbPage>
-              ) : (
-                <BreadcrumbLink asChild>
-                  <Link href="/">Overview</Link>
-                </BreadcrumbLink>
-              )}
-            </BreadcrumbItem>
-
-            {segments.map((segment, index) => {
-              const href = `/${segments.slice(0, index + 1).join("/")}`;
-              const isLast = index === segments.length - 1;
-
-              return (
-                <Fragment key={href}>
-                  <BreadcrumbSeparator />
-                  <BreadcrumbItem>
-                    {isLast ? (
-                      <BreadcrumbPage>{toTitle(segment)}</BreadcrumbPage>
-                    ) : (
-                      <BreadcrumbLink asChild>
-                        <Link href={href}>{toTitle(segment)}</Link>
-                      </BreadcrumbLink>
-                    )}
-                  </BreadcrumbItem>
-                </Fragment>
-              );
-            })}
-          </BreadcrumbList>
-        </Breadcrumb>
+        {breadcrumb}
 
         <div className="ml-auto">
           <ModeToggle />

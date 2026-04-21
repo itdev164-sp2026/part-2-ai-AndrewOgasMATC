@@ -19,7 +19,7 @@ import { ModeToggle } from "@/components/mode-toggle"
 
 export function AppSidebar() {
   const pathname = usePathname() || "/"
-  const { isMobile, setOpenMobile } = useSidebar()
+  const { isMobile, open, setOpenMobile } = useSidebar()
 
   const handleMenuClick = () => {
     if (isMobile) {
@@ -30,11 +30,13 @@ export function AppSidebar() {
   return (
     <Sidebar side="left" variant="sidebar" collapsible="icon">
       <div className="flex h-full flex-col">
-        <SidebarHeader className="px-2 py-3">
-          <div className="flex items-center gap-2">
-            <Home className="h-5 w-5 text-primary" />
-            <span className="text-sm font-semibold">Dashboard</span>
-          </div>
+        <SidebarHeader className="h-14 px-2 py-3">
+          {open ? (
+            <div className="flex items-center gap-2">
+              <Home className="h-5 w-5 text-primary" />
+              <span className="text-sm font-semibold">Dashboard</span>
+            </div>
+          ) : null}
         </SidebarHeader>
 
         <SidebarSeparator />
