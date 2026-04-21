@@ -50,3 +50,51 @@ the src/components/ folder.
 > It's an interesting thing seeing the AI modify code and create files.
 > I'm not entirely sure how I feel about it. It seems easy, or at least easy for small changes.
 > I don't however have a sense of ownership over what the AI created.
+
+## Activity 2: Building the Dashboard Shell
+
+### Prompt 1
+
+**What I asked:**
+
+> Using the shadcn sidebar components that are now in my src/components/ui/ folder,
+> create a professional, collapsible dashboard layout. It should include:
+
+> 1. A sidebar (src/components/app-sidebar.tsx) with navigation links for:
+>   - Overview (use the Home icon from lucide-react)
+>   - Projects (use the FolderOpen icon)
+>   - Settings (use the Settings icon)
+>
+> 2. A top navigation area with breadcrumbs showing the current page.
+>
+> 3. A main content area that wraps the existing page content.
+>
+> 4. Update src/app/layout.tsx to use the new SidebarProvider and sidebar layout.
+>
+> Important: Preserve the Developer Profile content from Activity 1 in
+> src/app/page.tsx — it should appear in the main content area of the new layout.
+> Keep the dark mode toggle working.
+
+**What happened:**
+
+> The AI created an app-sidebar.tsx file and a dashboard-topbar.tsx file
+> The created files seem to be correctly implemented and working correctly.
+
+### Prompt 2
+
+**What I asked:**
+
+> The sidebar does not close on mobile when clicking the Overview menu item
+> because it links to "/" which is already the current page. Fix this so the
+> sidebar closes on mobile when any menu item is clicked, even if it links
+> to the current page.
+
+**What happened:**
+
+> The AI edited the page to set the sidebar to closed when the Overview link was used.
+
+### Reflection
+
+> The use of the AI "Agent" still seems confusing and troubling.
+> I'm not entirely sure what it's doing, as I'm not familiar with shadcn.
+> Nothing seems to be broken from Activity-1
