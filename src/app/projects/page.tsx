@@ -38,7 +38,7 @@ export default async function ProjectsPage() {
       <section className="space-y-2">
         <h1 className="text-3xl font-bold tracking-tight">Projects</h1>
         <p className="text-muted-foreground">
-          Supabase-backed project records in your dashboard.
+          {/* Supabase-backed project records in your dashboard. */}
         </p>
       </section>
 

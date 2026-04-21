@@ -25,9 +25,13 @@ export function BreadcrumbNav() {
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link href="/">ITDEV-164</Link>
-          </BreadcrumbLink>
+          {pathname === "/" ? (
+            <BreadcrumbPage>ITDEV-164</BreadcrumbPage>
+          ) : (
+            <BreadcrumbLink asChild>
+              <Link href="/">ITDEV-164</Link>
+            </BreadcrumbLink>
+          )}
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
