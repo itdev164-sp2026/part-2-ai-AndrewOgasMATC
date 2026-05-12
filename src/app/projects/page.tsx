@@ -6,6 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabase";
 
 type ProjectRecord = {
@@ -35,11 +37,17 @@ export default async function ProjectsPage() {
 
   return (
     <div className="space-y-8">
-      <section className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">Projects</h1>
-        <p className="text-muted-foreground">
-          {/* Supabase-backed project records in your dashboard. */}
-        </p>
+      <section className="flex items-start justify-between">
+        <div className="space-y-2">
+          <h1 className="text-3xl font-bold tracking-tight">Projects</h1>
+          <p className="text-muted-foreground">{/* Supabase-backed project records in your dashboard. */}</p>
+        </div>
+
+        <div>
+          <Button asChild>
+            <Link href="/projects/new">New Project</Link>
+          </Button>
+        </div>
       </section>
 
       {error ? (
