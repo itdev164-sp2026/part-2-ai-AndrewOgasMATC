@@ -154,3 +154,71 @@ breadcrumb segment. Then update layout.tsx to use the new component.
 > the fetching of data, considering I've only done fetching form a
 > database once. As far as advantages, it seems like a lot less work
 > getting things running.
+
+## Activity 4: AI-Driven Forms & Validation
+
+### Prompt 1
+
+**What I asked:**
+
+Create a Zod validation schema in a new file src/lib/schemas.ts for a "Project"
+with the following fields:
+
+- title: string, minimum 3 characters, with a custom error message
+  "Title must be at least 3 characters"
+- description: string, minimum 10 characters, with a custom error message
+  "Description must be at least 10 characters"
+- status: enum with values "active", "completed", "archived"
+
+Export the schema and also export the inferred TypeScript type using z.infer.
+
+**What happened:**
+
+> The AI seems to have created the schema correctly.
+> Everything looks correct and everything functions as intended.
+> No changes had to be made to what the AI generated.
+
+### Prompt 2
+
+**What I asked:**
+
+Using the Zod schema from src/lib/schemas.ts, do the following:
+
+1. Create a form component at src/components/project-form.tsx that:
+   - Is a Client Component ("use client") because it uses react-hook-form hooks
+   - Uses react-hook-form with the zodResolver from @hookform/resolvers for validation
+   - Uses shadcn/ui Field, FieldLabel, and FieldError for field layout
+   - Uses shadcn/ui Input for title, Textarea for description, and Select for status
+   - Shows inline error messages under each field when validation fails
+   - Has a "Create Project" submit button
+   - Shows a sonner toast notification on successful submission
+
+2. Create a Server Action at src/app/actions.ts that:
+   - Has "use server" at the top of the file
+   - Accepts the validated form data
+   - Validates it again with the Zod schema (server-side validation)
+   - Inserts the validated data into the Supabase "projects" table
+   - Returns a success or error response
+
+3. Create a new page at src/app/projects/new/page.tsx that renders
+   the project form within the dashboard layout.
+
+4. Add a "New Project" button to the existing projects page
+   (src/app/projects/page.tsx) that links to /projects/new.
+
+Use @workspace to match the existing project styling.
+
+**What happened:**
+
+> The AI created all the requested files and connecth them up appropriately.
+> It set up the server side validation as well as client side validation 
+> through project-form.tsx. Both use the schema set up earlier. Everything
+> looks to be done correctly.
+
+### Reflection
+
+> Using Zod, I'm assuming that much of the normal setup for input checking
+> has been set up behind the scenes. This makes it much easier to set up
+> input valudation using a schema we set up. Being that the schema is used
+> to define the input validation test, it makes it easier to get things 
+> right and avoid bad data.
