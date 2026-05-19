@@ -222,3 +222,104 @@ Use @workspace to match the existing project styling.
 > input valudation using a schema we set up. Being that the schema is used
 > to define the input validation test, it makes it easier to get things 
 > right and avoid bad data.
+
+## Activity 6: Deployment, Webhooks, & AI-Testing
+
+### Prompt 1
+
+**What I asked:**
+
+I have a Next.js app with Supabase Auth. Using @workspace context to
+understand the app structure, write an End-to-End (E2E) test file at
+tests/auth.spec.ts using Playwright.
+
+The tests should verify:
+
+1. LOGIN PAGE VISIBLE: Navigate to /login and confirm the login form
+   is visible (check for email input, password input, and submit button).
+
+2. REDIRECT AFTER LOGIN: After a successful login with valid credentials,
+   the user is redirected to the dashboard or projects page.
+
+3. SIDEBAR NAVIGATION: After login, verify that the sidebar navigation
+   links are visible: "Overview", "Projects", and "Settings".
+
+Requirements:
+- Use role-based locators (getByRole, getByLabel, getByText) instead of
+  CSS selectors or test IDs. This makes tests more accessible and resilient
+  to UI changes.
+- Add clear test descriptions that explain what each test verifies.
+- Handle the async nature of navigation and page loads with proper
+  Playwright waiting strategies.
+- Read test credentials from process.env.TEST_USER_EMAIL and
+  process.env.TEST_USER_PASSWORD. Do not hardcode credentials. If those
+  variables are not set, the credentialed tests should skip with a clear
+  message rather than fail.
+
+**What happened:**
+
+> Copilot generated tests that mostly worked. It checked for email and
+> password fields, a login button, and that the page logs in. It then
+> checked for the navigation links "Overview", "Projects", and "Settings".
+> Everything but the check for "Projects" worked.
+
+### Prompt 2
+
+**What I asked:**
+
+Here's the error I'm getting while trying run a test on the site. What sorts of solutions are available for this:
+
+1) tests\auth.spec.ts:43:7 › Auth — credentialed flows › SIDEBAR NAVIGATION: sidebar links visible after login 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('link', { name: /projects/i })
+    Expected: visible
+    Error: strict mode violation: getByRole('link', { name: /projects/i }) resolved to 2 elements:
+        1) <a href="/projects" data-size="default" data-active="false" data-sidebar="menu-button" data-slot="sidebar-menu-button" class="peer/menu-button group/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-for…>…</a> aka locator('ul').getByRole('link', { name: 'Projects' })
+        2) <span role="link" aria-current="page" aria-disabled="true" data-slot="breadcrumb-page" class="font-normal text-foreground">Projects</span> aka getByLabel('breadcrumb').getByRole('link', { name: 'Projects' })
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('link', { name: /projects/i })
+
+
+      59 |
+      60 |     await expect(overview).toBeVisible()
+    > 61 |     await expect(projects).toBeVisible()
+         |                            ^
+      62 |     await expect(settings).toBeVisible()
+      63 |   })
+      64 | })
+        at C:\Users\Andrew\Documents\Class_Files_2026-Spring\ITDEV-164\Repos\part-2-ai-AndrewOgasMATC\tests\auth.spec.ts:61:28
+
+**What happened:**
+
+> Copilot generated a solution that involved adding a tag in the 
+> code to let the check know about the conflicting elements. After
+> this, all of the tests pass.
+
+### Reflection
+
+> Creating code with Copilot then using Copilot to fix problems with
+> the code seems odd. It's presumably the same model, now just focused
+> on a different task. Perhaps in the future, the systems that 
+> interface with the model will change to do more steps to review what
+> it generates.
+
+### Course Reflection
+
+> The agentic workflow is definitely different. It seems almost magic.
+> Almost. There were definitely odd quirks and mistakes it made. At
+> the same time, when trying to learn, it definitley seems like a 
+> perfect way to prevent any learning. I worry about my skill being
+> able to know what the code is doing, as I don't have to do the work.
+> A muscle that isn't used atrophes. A memory not visited, is forgotten.
+> Will I be able to keep a handle on what the AI is doing if I don't
+> keep using my coding skills.
+
+> At the same time, this seems to be the direction the world is headed.
+> It is definitely exciting to see the AI systems generate a solution
+> and things happen on screen. Code is produced quicker and things get
+> done faster. These systems aren't going away, but what they develop
+> into is anyone's guess.
