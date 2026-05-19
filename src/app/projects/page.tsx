@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { supabase } from "@/lib/supabase";
+import { createServerComponentSupabaseClient } from "@/lib/supabase/server";
 
 type ProjectRecord = {
   id?: string | number;
@@ -31,6 +31,7 @@ function getStatusBadgeClass(status: string): string {
 }
 
 export default async function ProjectsPage() {
+  const supabase = createServerComponentSupabaseClient()
   const { data, error } = await supabase.from("projects").select("*");
 
   const projects = (data ?? []) as ProjectRecord[];

@@ -7,6 +7,8 @@ import { DashboardTopbar } from "@/components/dashboard-topbar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { createServerComponentSupabaseClient } from "@/lib/supabase/server"
+import type { User } from "@supabase/supabase-js"
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -20,11 +22,17 @@ export const metadata: Metadata = {
   description: "AI-native web development with Next.js, Tailwind, and Supabase",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const supabase = createServerComponentSupabaseClient()
+
+  const { data } = await supabase.auth.getUser()
+
+  const user = (data?.user ?? null) as User | null
+
   return (
     <html lang="en" suppressHydrationWarning className={cn("font-sans", geist.variable)}>
       <body className={`${inter.variable} font-sans antialiased`}>
@@ -35,7 +43,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <SidebarProvider>
-            <AppSidebar />
+            <AppSidebar user={user} />
             <SidebarInset>
               <DashboardTopbar breadcrumb={<BreadcrumbNav />} />
               <main className="flex-1 px-4 py-6 md:px-6 md:py-8">
@@ -46,5 +54,5 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }

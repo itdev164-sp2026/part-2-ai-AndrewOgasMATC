@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, FolderOpen, Settings } from "lucide-react"
+import { Home, FolderOpen, Settings, LogOut } from "lucide-react"
 import {
   Sidebar,
   SidebarContent,
@@ -16,8 +16,11 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import { ModeToggle } from "@/components/mode-toggle"
+import { Button } from "@/components/ui/button"
+import { signOut } from "@/app/actions"
+import type { User } from "@supabase/supabase-js"
 
-export function AppSidebar() {
+export function AppSidebar({ user }: { user?: User | null }) {
   const pathname = usePathname() || "/"
   const { isMobile, open, setOpenMobile } = useSidebar()
 
@@ -73,8 +76,21 @@ export function AppSidebar() {
         </SidebarContent>
 
         <SidebarFooter className="mt-auto p-2">
-          <div className="flex items-center justify-center">
-            <ModeToggle />
+          <div className="flex flex-col items-center justify-center gap-2">
+            {user ? (
+              <div className="w-full">
+                <Button variant="ghost" size="sm" onClick={async () => await signOut()}>
+                  <div className="flex items-center gap-2">
+                    <LogOut className="size-4" />
+                    <span>Sign Out</span>
+                  </div>
+                </Button>
+              </div>
+            ) : null}
+
+            <div className="flex items-center justify-center">
+              <ModeToggle />
+            </div>
           </div>
         </SidebarFooter>
       </div>
