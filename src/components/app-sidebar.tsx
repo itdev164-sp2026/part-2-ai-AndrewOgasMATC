@@ -56,8 +56,8 @@ export function AppSidebar({ user }: { user?: User | null }) {
             </SidebarMenuItem>
 
             <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={pathname.startsWith("/projects")}>
-                <Link href="/projects" className="flex w-full items-center gap-2" onClick={handleMenuClick}>
+              <SidebarMenuButton asChild isActive={pathname.startsWith("/projects/")}>
+                <Link href="/projects/" className="flex w-full items-center gap-2" onClick={handleMenuClick}>
                   <FolderOpen className="h-4 w-4" />
                   <span>Projects</span>
                 </Link>
